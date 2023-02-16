@@ -1,27 +1,33 @@
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const deleteHandler = () => {
+    setIsDeleting(true);
+  };
+
+  const proceedHandler = () => {
+    setIsDeleting(false);
+  };
+
+  let warning;
+
+  if (isDeleting) {
+    warning = (
+      <div id="alert">
+        <h2>Are you sure?</h2>
+        <p>These changes can't be reverted!</p>
+        <button onClick={proceedHandler}>Proceed</button>
+      </div>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+    <div>
+      {warning}
+      <button onClick={deleteHandler}>Delete</button>
     </div>
   );
 }
